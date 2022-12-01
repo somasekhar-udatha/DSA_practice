@@ -42,6 +42,28 @@ struct node *insertion_end(struct node *head,struct node *tail)
     return head;
 }
 
+struct node *insertion_middle(struct node *head)
+{
+	int i,index;
+	struct node *temp,*temp2;
+	printf("enter the element to insert \n");
+	temp2 = (struct node *) malloc(sizeof(struct node));
+	scanf("%d",&temp2->data);
+	printf("enter position to insert \n");
+	scanf("%d",&index);
+	temp = head;
+	
+	for(i=1;i<index-1;i++)
+	{
+		temp = temp->next;
+	}
+	
+	temp2->next = temp->next;
+	temp->next = temp2;
+	
+	return head;
+}
+
 int main()
 {
     int choice=1;
@@ -77,6 +99,8 @@ int main()
     //traversal(head);
     //tail = insertion_end(head,tail);
     //traversal(head);
+    head = insertion_middle(head);
+	traversal(head);
     
     
 
