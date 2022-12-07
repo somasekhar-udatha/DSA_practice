@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node 
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+
+void traversal(struct node *ptr)
+{
+    while (ptr != NULL)
+    {
+        printf("%d \t",ptr->data);
+        ptr = ptr->next;
+        
+    }
+}
+
+int main()
+{
+    int choice=1;
+    struct node *head = NULL,*tail,*newnode;
+    while (choice == 1)
+    {
+        printf("enter element \n");
+        newnode = (struct node *) malloc(sizeof(struct node));
+        scanf("%d",&newnode->data);
+        newnode->next = NULL;
+        
+        if (head == NULL)
+        {
+            head = newnode;
+            tail = newnode;
+            head->prev = NULL;
+        }
+        
+        else 
+        {
+            tail->next = newnode;
+            newnode->prev = tail;
+            tail = newnode;
+        }
+        
+        printf("enter 1 to continue adding elements and 0 to stop \n");
+        scanf("%d",&choice);
+        
+    }
+    traversal(head);
+
+    return 0;
+}
