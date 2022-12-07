@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node 
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+
+void traversal(struct node *ptr)
+{
+    while (ptr != NULL)
+    {
+        printf("%d \t",ptr->data);
+        ptr = ptr->next;
+        
+    }
+}
+
+struct node *insertion_start(struct node *head)
+{
+    struct node *temp;
+    printf("enter element to insert at start");
+    temp = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp->data);
+    temp->next = head;
+    head->prev = temp;
+    head = temp;
+    head->prev = NULL;
+    return head;
+    
+}
+
+struct node *insertion_middle(struct node *head)
+{
+    struct node *temp, *temp1;
+    int i,index;
+    printf("enter the element to insert \n");
+    temp1 = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp1->data);
+    printf("enter the position to insert element\n");
+    scanf("%d",&index);
+    temp = head;
+    for (i=1;i<index-1;i++)
+    {
+        temp = temp->next;
+    }
+    temp1->next = temp->next;
+    temp1->prev = temp;
+    temp->next = temp1;
+    
+    return head;
+}
+
+struct node *insertion_end(struct node *head,struct node *tail)
+{
+    struct node *temp;
+    //temp->next = NULL;
+    printf("enter element to insert at end");
+    temp = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp->data);
+    tail->next = temp;
+    temp->prev = tail;
+    tail = temp;
+    tail->next = NULL;
+    //traversal(head);
+    //return head;
+    return head;
+}
+
+int main()
+{
+    int choice=1;
+    struct node *head = NULL,*tail,*newnode;
+    while (choice == 1)
+    {
+        printf("enter element \n");
+        newnode = (struct node *) malloc(sizeof(struct node));
+        scanf("%d",&newnode->data);
+        newnode->next = NULL;
+        
+        if (head == NULL)
+        {
+            head = newnode;
+            tail = newnode;
+            head->prev = NULL;
+        }
+        
+        else 
+        {
+            tail->next = newnode;
+            newnode->prev = tail;
+            tail = newnode;
+        }
+        
+        printf("enter 1 to continue adding elements and 0 to stop \n");
+        scanf("%d",&choice);
+        
+    }
+    traversal(head);
+    //tail = insertion_end(head,tail);
+    //head = insertion_start(head);
+    head = insertion_middle(head);
+    traversal(head);
+
+    return 0;
+}
