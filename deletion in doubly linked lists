@@ -93,24 +93,21 @@ struct node *deletion_end(struct node *head,struct node *tail)
 
 struct node *deletion_middle(struct node *head)
 {
-    struct node *temp, *temp1;
+  struct node *temp, *temp1;
     int i,index;
     printf("enter the position to delete element\n");
     scanf("%d",&index);
+    temp = head;
     for (i=1;i<index-1;i++)
     {
         temp = temp->next;
     }
-    temp1 = temp->next;
+    temp1 = temp->next->next;
     temp->next = temp->next->next;
-    temp->next->prev = temp;
-    //temp1->next = NULL;
-    //temp1->prev = NULL;
-    
-    free(temp1);
+    //temp->next = temp1;
+    temp1->prev = temp;
     
     return head;
-    
 }
 
 int main()
