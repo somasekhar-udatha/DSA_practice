@@ -23,65 +23,6 @@ void traversal(struct node *ptr)
     
 }
 
-struct node *insertion_start(struct node *head,struct node *tail)
-{
-    struct node *temp;
-    printf("enter element to add at beginning \n");
-    temp = (struct node *) malloc(sizeof(struct node));
-    scanf("%d",&temp->data);
-    
-    temp->next = head;
-    head->prev = temp;
-    head = temp;
-    tail->next = head;
-    head->prev = tail;
-    
-    return head;
-}
-
-struct node *insertion_end(struct node *head,struct node *tail)
-{
-    struct node *temp;
-    printf("enter element to add at end \n");
-    temp = (struct node *) malloc(sizeof(struct node));
-    scanf("%d",&temp->data);
-    
-    tail->next = temp;
-    temp->prev = tail;
-    tail = temp;
-    tail->next = head;
-    head->prev = tail;
-    
-    return tail;
-}
-
-struct node *insertion_middle(struct node *head)
-{
-    struct node *temp1, *temp2, *temp_add;
-    printf("enter element \n");
-    temp_add = (struct node *) malloc(sizeof(struct node));
-    scanf("%d",&temp_add->data);
-    
-    int index,i;
-    printf("enter position to add element \n");
-    scanf("%d",&index);
-    
-    temp1 = head;
-    for (i=1;i<index-1;i++)
-    {
-        temp1 = temp1->next;
-    }
-    
-    temp2 = temp1->next;
-    temp_add->next = temp2;
-    temp2->prev = temp_add;
-    temp1->next = temp_add;
-    temp_add->prev = temp1;
-    
-    return head;
-    
-}
-
 struct node *deletion_start(struct node *head,struct node *tail)
 {
     struct node *temp;
@@ -163,11 +104,7 @@ int main()
     head->prev = tail;
     tail->next = head;
     traversal(head);
-    
-
-    //head = insertion_start(head,tail);
-    //tail = insertion_end(head,tail);
-    //head = insertion_middle(head);
+   
     //head = deletion_start(head,tail);
     //tail = deletion_end(head,tail);
     head = deletion_middle(head);
