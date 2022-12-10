@@ -36,7 +36,7 @@ int main()
         {
             head = newnode;
             tail = newnode;
-            head->prev = NULL;
+            //head->prev = NULL;
         }
         
         else 
@@ -50,6 +50,7 @@ int main()
         scanf("%d",&choice);
         
     }
+    head->prev = tail;
     //tail->next = head;
     traversal(head);
 
