@@ -1,0 +1,193 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node 
+{
+    int data;
+    struct node *next;
+};
+
+
+void traversal(struct node *ptr)
+{
+    while (ptr!=NULL)
+    {
+        printf("%d\t",ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+struct node *insertion_start(struct node *head)
+{
+    struct node *temp;
+    printf("enter element to insert \n");
+    temp = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp->data);
+    temp->next = head;
+    head= temp ;
+    //traversal(head);
+    
+    return head;
+}
+
+struct node *insertion_end(struct node *head,struct node *tail)
+{
+    struct node *temp;
+    printf("enter element to insert \n");
+    temp = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp->data);
+    temp->next = NULL;
+    tail->next = temp;
+    
+    return head;
+}
+
+struct node *insertion_middle(struct node *head)
+{
+	int i,index;
+	struct node *temp,*temp2;
+	printf("enter the element to insert \n");
+	temp2 = (struct node *) malloc(sizeof(struct node));
+	scanf("%d",&temp2->data);
+	printf("enter position to insert \n");
+	scanf("%d",&index);
+	temp = head;
+	
+	for(i=1;i<index-1;i++)
+	{
+		temp = temp->next;
+	}
+	
+	temp2->next = temp->next;
+	temp->next = temp2;
+	
+	return head;
+}
+
+struct node *deletion_start(struct node *head)
+{
+    struct node *temp;
+    temp = head;
+    head = temp->next; // or head = head->next
+    temp->next = NULL;
+    
+    return head;
+}
+
+struct node *deletion_middle(struct node *head)
+{
+    struct node *temp, *temp1;
+    temp = head;
+    printf("enter position to delete element \n");
+    int index,i;
+    scanf("%d",&index);
+    
+    for (i=1;i<index-1;i++)
+    {
+        temp = temp->next;
+    }
+    
+    temp1 = temp->next->next;
+    temp->next = temp1;
+    
+    return head;
+}
+
+struct node *deletion_end(struct node *head)
+{
+    struct node *temp;
+    temp = head;
+    while(temp->next->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = NULL;
+    
+    return head;
+}
+
+
+int main()
+{
+    int choice=1;
+    struct node *head,*tail,*newnode;
+    head=NULL;
+    
+    while(choice == 1)
+    {
+        printf("enter new element\n");
+        newnode = (struct node *) malloc(sizeof(struct node));
+        scanf("%d",&newnode->data);
+        newnode->next = NULL;
+        
+        if (head == NULL)
+        {
+            head = newnode;
+            tail = newnode;
+        }
+        
+        else
+        {
+            tail->next = newnode;
+            tail = newnode;
+        }
+        
+        printf("enter 1 to add another element or enter 0 to stop \n");
+        scanf("%d",&choice);
+        
+    }
+    traversal(head);
+    
+    printf("press 1 for insertion and 2 for deletion \n");
+    scanf("%d",&choice);
+    
+    switch(choice)
+    {
+        case 1 : printf("enter 1 for insertion at start , 2 for insertion at end , 3 for insertion in middle \n");
+                 scanf("%d",&choice);
+                 switch(choice)
+                 {
+                    case 1 : printf("insertion at start \n");
+                             head = insertion_start(head); 
+                             traversal(head);
+                             break;
+                    case 2 : printf("insertion at end \n");
+                             tail = insertion_end(head,tail); 
+                             traversal(head);
+                             break; 
+                    case 3 : printf("insertion at middle \n");
+                             head = insertion_middle(head); 
+                             traversal(head);
+                             break;
+                    default : printf("invali input \n");
+                              break;
+                     
+                 }
+                 break;
+        case 2 : printf("enter 1 for deletion at start , 2 for deletion at end , 3 for deletion in middle \n");
+                 scanf("%d",&choice);
+                 switch(choice)
+                 {
+                    case 1 : printf("deletion at start \n");
+                             head = deletion_start(head); 
+                             traversal(head);
+                             break;
+                    case 2 : printf("deletion at end \n");
+                             tail = deletion_end(head); 
+                             traversal(head);
+                             break; 
+                    case 3 : printf("deletion at middle \n");
+                             head = deletion_middle(head); 
+                             traversal(head);
+                             break;
+                    default : printf("invali input \n");
+                              break;
+                     
+                 }
+                 break;
+        default : printf("invalid input \n");
+                 break;
+                 
+    }
+    return 0;
+}
