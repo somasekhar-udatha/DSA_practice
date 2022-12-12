@@ -38,6 +38,7 @@ struct node *insertion_end(struct node *head,struct node *tail)
     scanf("%d",&temp->data);
     temp->next = NULL;
     tail->next = temp;
+    tail = temp;
     
     return head;
 }
