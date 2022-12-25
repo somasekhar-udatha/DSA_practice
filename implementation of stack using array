@@ -1,0 +1,76 @@
+#include <stdio.h>
+// Stack implementation using Arrays
+int stack[100],size,top,choice,i;
+
+
+void push()
+{
+    if (top>=size-1)
+    {
+        printf("STACK OVERFLOW!\n");
+    }
+    else
+    {
+        top++;
+        printf("enter element\n");
+        scanf("%d",&stack[top]);
+    }
+    printf("\n");
+    //return top;
+}
+
+void pop()
+{
+    if(top<=-1)
+    {
+        printf("STACK UNDERFLOW!\n");
+    }
+    else
+    {
+        printf("popped element is %d\n",stack[top]);
+        top--;
+    }
+    printf("\n");
+    
+}
+void display()
+{
+    //int i;
+    for (i=top;i>=0;i--)
+    {
+        printf("%d \t",stack[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    top = -1;
+    printf("enter the size of stack\n");
+    scanf("%d",&size);
+    //int choice;
+    printf("1.push operation\n2.pop operation\n3.display operation\n4.terminate\n");
+    printf("enter choice to perform operations on stack\n");
+    scanf("%d",&choice);
+    while(choice != 4)
+    {
+        switch(choice)
+        {
+            case 1: push();
+                    break;
+            case 2: pop();
+                    break;
+            case 3: display();
+                    break;
+            case 4: printf("EXIT POINT\n");
+                    break;
+            default:printf("INVALID INPUT\n");
+                    break;
+        }
+    printf("\n");
+    printf("1.push operation\n2.pop operation\n3.display operation\n4.terminate\n");
+    printf("enter choice to perform operations on stack\n");
+    scanf("%d",&choice);
+    }
+    
+    return 0;
+}
