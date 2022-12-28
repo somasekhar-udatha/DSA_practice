@@ -1,0 +1,140 @@
+#include <stdio.h>
+void printarray(int *A,int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        printf("%d\t",A[i]);
+    }
+    printf("\n");
+}
+
+void bubblesort(int *A,int n)
+{
+    int i,j,temp;
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(A[j]>A[j+1])
+            {
+                temp = A[j];
+                A[j] = A[j+1];
+                A[j+1] = temp;
+            }
+        }
+    }
+}
+void selectionsort(int *A,int n)
+{
+    int i,j,temp,min;
+    for(i=0;i<n-1;i++)
+    {
+        min = i;
+        for(j = i+1;j<n;j++)
+        {
+            if(A[j]<A[min])
+            {
+                min = j;
+            }
+        }
+        temp = A[i];
+        A[i] = A[min];
+        A[min] = temp;
+        
+    }
+}
+int partition(int A[],int low,int high )
+{
+    int i,j,pivot,temp;
+    pivot = A[low];
+    i = low+1;
+    j = high;
+    do
+    {
+        while(A[i]<=pivot)
+        {
+            i++;
+        }
+        while(A[j]>pivot)
+        {
+            j--;
+        }
+        if(i<j)
+        {
+            temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
+        }
+    }while(i<j);
+    temp = A[low];
+    A[low] = A[j];
+    A[j] = temp;
+    
+    return j;
+}
+void quicksort(int *A,int low,int high)
+{
+    int partition_index;
+    if(low<high)
+    {
+        partition_index = partition(A,low,high);
+        quicksort(A,low,partition_index-1);
+        quicksort(A,partition_index+1,high);
+    }
+    
+}
+void merge(int A[],int low,int mid,int high)
+{
+    int i,j,k,temp,B[100];
+    for(i = low , j = mid+1, k = low ; i <= mid && j <= high ; k++)
+    {
+        if(A[i]<=A[j])
+        {
+            B[k] = A[i++];
+            
+        }
+        else
+        {
+            B[k] = A[j++];
+        }
+    }
+    while(i<=mid)
+    {
+        B[k++] = A[i++];
+    }
+    while(j<=high)
+    {
+        B[k++] = A[j++];
+    }
+    for(i=low;i<=high;i++)
+    {
+        A[i] = B[i];
+    }
+    
+}
+void mergesort(int A[],int low,int high)
+{
+    int mid;
+    if(low<high)
+    {
+        mid = (low+high)/2;
+        mergesort(A,low,mid);
+        mergesort(A,mid+1,high);
+        merge(A,low,mid,high);
+    }
+}
+
+int main()
+{
+    int A[] = {2,3,1,11,45,21,6};
+    int n = 7;
+    printarray(A,n);
+    //bubblesort(A,n);
+    //selectionsort(A,n);
+    //quicksort(A,0,n-1);
+    mergesort(A,0,n-1);
+    printarray(A,n);
+
+    return 0;
+}
