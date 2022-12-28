@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *push(struct node *top)
+{
+    struct node *temp;
+    printf("enter element to push \n");
+    temp = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&temp->data);
+    
+    temp->next = top;
+    top = temp;
+    return top;
+}
+
+void display(struct node *top)
+{
+    struct node *temp;
+    temp = top;
+    while(temp!=NULL)
+    {
+        printf("%d \t",temp->data);
+        temp = temp->next;
+    }
+    
+    printf("\n");
+}
+
+struct node *pop(struct node *top)
+{
+    if(top == NULL)
+    {
+        printf("STACK UNDERFLOW \n");
+    }
+    else
+    {
+        struct node *temp = top;
+        top = top->next;
+        printf("popped element is %d \n",temp->data);
+    }
+    
+    return top;
+}
+
+int main()
+{
+    int choice;
+    struct node *top = NULL;
+    printf("1.push operation\n2.pop operation\n3.display operation\n4.terminate\n");
+    printf("enter choice to perform operations on stack\n");
+    scanf("%d",&choice);
+    while(choice != 4)
+    {
+        switch(choice)
+        {
+            case 1: top = push(top);
+                    break;
+            case 2: top = pop(top);
+                    break;
+            case 3: display(top);
+                    break;
+            case 4: printf("EXIT POINT\n");
+                    break;
+            default:printf("INVALID INPUT\n");
+                    break;
+        }
+        printf("\n");
+        printf("1.push operation\n2.pop operation\n3.display operation\n4.terminate\n");
+        printf("enter choice to perform operations on stack\n");
+        scanf("%d",&choice);
+    }
+    
+    return 0;
+}
