@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int queue[15],front = -1,rear = -1;
+
+void enqueue()
+{
+	int ele;
+	printf("enter element to add\n");
+	scanf("%d",&ele);
+	if(rear < 15)
+	{
+		if(rear == -1)
+		{
+			rear++;
+			front++;
+			queue[rear] = ele;
+    	}
+		else
+		{
+			rear++;
+			queue[rear] = ele;
+		}
+	}
+	else
+	{
+		printf("OVERFLOW \n");
+	}
+}
+
+void dequeue()
+{
+	if(front == -1 || front > rear)
+	{
+		printf("UNDERFLOW \n");
+	}
+	else
+	{
+		printf("element popped = %d\n",queue[front]);
+		front++;
+	}
+	
+}
+void display()
+{
+	int i=front;
+	if(front == -1)
+	{
+		printf("QUEUE IS EMPTY \n");
+	}
+	else
+	{
+		for(i=front;i<=rear;i++)
+		{
+			printf("%d \t",queue[i]);	
+		}
+		printf("\n");
+	}
+	
+}
+int main()
+{
+	int ch=1;
+	while(ch!=4)
+	{
+		printf("1.enqueue\n2.dequeue\n3.display\n4.terminate\n");
+		printf("enter choice to perform operation \n");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1: enqueue();
+					break;
+			case 2: dequeue();
+					break;
+			case 3: display();
+					break;
+			case 4: printf("EXIT POINT\n");
+					break;
+			default:printf("INVALID INPUT\n");
+					break;
+		}
+	}
+	return 0;
+}
