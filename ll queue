@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+	int data;
+	struct node *next;
+}*front=NULL,*rear=NULL,*newnode,*temp;
+
+void enqueue()
+{
+	printf("enter element to add\n");
+	newnode = (struct node *) malloc(sizeof(struct node));
+	scanf("%d",&newnode->data);
+	newnode->next = NULL;
+	if(rear == NULL)
+	{
+		front = rear = newnode;
+	}
+	else
+	{
+		rear->next = newnode;
+		rear = newnode;
+	}
+}
+
+void dequeue()
+{
+	
+}
+
+int main()
+{
+	int ch=1;
+	while(ch!=4)
+	{
+		printf("1.enqueue\n2.dequeue\n3.display\n4.terminate\n");
+		printf("enter choice to perform operation \n");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1: enqueue();
+					break;
+			case 2: dequeue();
+					break;
+			case 3: display();
+					break;
+			case 4: printf("EXIT POINT\n");
+					break;
+			default:printf("INVALID INPUT\n");
+					break;
+		}
+	}
+	return 0;
+}
