@@ -1,0 +1,76 @@
+#include <stdio.h>
+int front = -1,rear = -1,size;
+void enqueue(int queue[]) {
+    if(rear < size) {
+        if(front == -1) {
+            front++;
+            rear++;
+            printf("Enter element to insert \n");
+            scanf("%d",&queue[rear]);
+        }
+        else {
+            rear++;
+            printf("Enter element to insert \n");
+            scanf("%d",&queue[rear]);
+        
+        }
+    }
+    else {
+        printf("OVER FLOW!\n");
+    }
+    
+    //return queue[];
+}
+
+void dequeue(int queue[]) {
+    if(front == -1 || front > rear) {
+        printf("UNDER FLOW!");
+    }
+    else {
+        printf("popped element is %d \n",queue[front]);
+        front++;
+    }
+    //return queue[];
+}
+
+void display(int queue[]) {
+    int i = front;
+    if(i == -1) {
+        printf("queue is empty\n");
+    }
+    else {
+        for(i=front;i<=rear;i++) {
+            printf("%d \t",queue[i]);
+        }
+        printf("\n");
+    }
+    
+}
+
+int main()
+{
+    int ch=1;
+    printf("enter size of queue \n");
+    scanf("%d",&size);
+    int queue[size];
+    while(ch != 4) {
+        printf("1.enqueue()\n2.dequeue()\n3.display()\n4.terminate\n");
+        printf("enter choice to perform operation \n");
+        scanf("%d",&ch);
+        switch(ch) {
+            case 1: enqueue(queue);
+                    break;
+            case 2: dequeue(queue);
+                    break;
+            case 3: display(queue);
+                    break;
+            case 4: printf("EXIT POINT!\n");
+                    break;
+            default:printf("INVALID INPUT!\n");
+                    break;
+        }
+        
+    }
+    return 0;
+
+}
