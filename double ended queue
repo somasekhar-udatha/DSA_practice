@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+}*front = NULL,*rear = NULL,*newnode;
+
+void enqueue_front()
+{
+    printf("enter element to perform enqueue() operation \n");
+    newnode = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&newnode->data);
+    newnode->next = front;
+    front = newnode;
+    
+}
+
+void enqueue_rear()
+{
+    printf("enter element to perform enqueue() operation \n");
+    newnode = (struct node *) malloc(sizeof(struct node));
+    scanf("%d",&newnode->data);
+    rear->next = newnode;
+    rear = newnode;
+}
+
+void dequeue_front()
+{
+    printf("element removed = %d\n",front->data);
+    front = front->next;
+}
+
+void dequeue_rear()
+{
+    struct node *ptr=front;
+    printf("element removed = %d\n",rear->data);
+    while(ptr->next->next != NULL)
+    {
+        ptr = ptr->next;
+    }
+    ptr->next = NULL;
+    rear = ptr;
+}
+
+void display()
+{
+    struct node *ptr;
+    ptr = front;
+    while(ptr != NULL)
+    {
+        printf("%d\t",ptr->data);
+        ptr = ptr->next;
+    }
+    printf("\n");
+}
+
+
+int main()
+{
+    int ch;
+    printf("1.enqueue\n2.dequeue\n3.display\n4.terminate\n");
+    printf("enter choice to perform\n");
+    scanf("%d",&ch);
+    while(ch != 4)
+    {
+        switch(ch)
+        {
+            case 1: if(front == NULL)
+                    {
+                        printf("enter element to perform enqueue() operation \n");
+                        newnode = (struct node *) malloc(sizeof(struct node));
+                        scanf("%d",&newnode->data);
+                        front = newnode;
+                        rear = newnode;
+                        
+                    }
+                    else
+                    {
+                        printf("1.enqueue at front\n2.enqueue at rear\n");
+                        scanf("%d",&ch);
+                        switch(ch)
+                        {
+                            case 1: enqueue_front();
+                                    break;
+                            case 2: enqueue_rear();
+                                    break;
+                            default:printf("INVALID INPUT\n");
+                                    break;
+                        }
+                    }
+                    break;
+            case 2: if(front == NULL)
+                    {
+                        printf("queue is empty\n");
+                        
+                    }
+                    else
+                    {
+                        printf("1.dequeue at front\n2.dequeue at rear\n");
+                        scanf("%d",&ch);
+                        switch(ch)
+                        {
+                            case 1: dequeue_front();
+                                    break;
+                            case 2: dequeue_rear();
+                                    break;
+                            default:printf("INVALID INPUT\n");
+                                    break;
+                            
+                        }
+                    }
+                    break;
+            case 3: display();
+                    break;
+            case 4: printf("EXIT POINT\n");
+                    break;
+            default:printf("INVALID INPUT\n");
+                    break;
+            
+        }
+        printf("1.enqueue\n2.dequeue\n3.display\n4.terminate\n");
+        printf("enter choice to perform\n");
+        scanf("%d",&ch);
+    }
+    
+    return 0;
+}
