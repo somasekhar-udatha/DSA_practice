@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node 
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *creating_node()
+{
+    struct node *temp;
+    temp = (struct node *) malloc(sizeof(struct node));
+    printf("enter data to store\n");
+    scanf("%d",&temp->data);
+    temp->left = NULL;
+    temp->right = NULL;
+    
+    return temp;
+}
+struct node *postorder_traversal(struct node *root)
+{
+    if(root != NULL)
+    {
+        postorder_traversal(root->left);
+        postorder_traversal(root->right);
+        printf("%d\t",root->data);
+    }
+}
+
+int main()
+{
+    struct node *root,*p2,*p3,*p4,*p5;
+    root = creating_node();
+    p2 = creating_node();
+    p3 = creating_node();
+    p4 = creating_node();
+    p5 = creating_node();
+    root->left = p2;
+    root->right = p3;
+    p2->left = p4;
+    p2->right = p5;
+    
+    postorder_traversal(root);
+    
+    
+    return 0;
+}
