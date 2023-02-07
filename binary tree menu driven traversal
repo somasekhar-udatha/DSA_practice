@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+struct node *create_node()
+{
+    struct node *temp;
+    temp = (struct node *) malloc(sizeof(struct node));
+    printf("enter data to store\n");
+    scanf("%d",&temp->data);
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
+}
+void inorder_traversal(struct node *root)
+{
+    if(root != NULL)
+    {
+        inorder_traversal(root->left);
+        printf("%d\t",root->data);
+        inorder_traversal(root->right);
+    }
+}
+void preorder_traversal(struct node *root)
+{
+    if(root != NULL)
+    {
+        printf("%d\t",root->data);
+        preorder_traversal(root->left);
+        preorder_traversal(root->right);
+    }
+}
+void postorder_traversal(struct node *root)
+{
+    if(root != NULL)
+    {
+        preorder_traversal(root->left);
+        preorder_traversal(root->right);
+        printf("%d\t",root->data);
+    }
+}
+int main()
+{
+    struct node *root,*p1,*p2,*p3,*p4;
+    root = create_node();
+    p1 = create_node();
+    p2 = create_node();
+    p3 = create_node();
+    p4 = create_node();
+    root->left = p1;
+    root->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+    int ch;
+    printf("enter choice to perform traversal\n");
+    printf("1.inorder\n2.preorder\n3.postorder\n");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1: printf("inorder traversal\n");
+                inorder_traversal(root);
+                break;
+        case 2: printf("preorder traversal\n");
+                preorder_traversal(root);
+                break;
+        case 3: printf("postorder traversal\n");
+                postorder_traversal(root);
+                break;
+        default:printf("invalid input\n");
+                break;
+    }
+    return 0;
+}
